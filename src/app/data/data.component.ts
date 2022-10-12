@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-data',
@@ -7,8 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DataComponent implements OnInit {
 
-  constructor() { }
-  all=[]
+  constructor(private myapi:ApiService) { 
+    this.fetchData()
+  }
+  fetchData=()=>{
+    this.myapi.viewdata().subscribe(
+      (data)=>{
+        this.usdata=data
+      }
+    )
+  }
+  usdata:any={}
 
   ngOnInit(): void {
   }
